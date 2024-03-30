@@ -6,7 +6,7 @@
   <link href="https://crixusll.github.io/atom.xml" rel="self"/>
   
   <link href="https://crixusll.github.io/"/>
-  <updated>2024-03-30T12:30:21.446Z</updated>
+  <updated>2023-08-09T10:02:01.494Z</updated>
   <id>https://crixusll.github.io/</id>
   
   <author>
@@ -15,48 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="https://crixusll.github.io/2024/03/30/VSCode%20Python%E7%A8%8B%E5%BA%8F%E9%99%84%E5%8A%A0%E5%88%B0%E8%BF%9B%E7%A8%8Bdebug/"/>
-    <id>https://crixusll.github.io/2024/03/30/VSCode%20Python%E7%A8%8B%E5%BA%8F%E9%99%84%E5%8A%A0%E5%88%B0%E8%BF%9B%E7%A8%8Bdebug/</id>
-    <published>2024-03-30T12:30:21.221Z</published>
-    <updated>2024-03-30T12:30:21.446Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>某个处于进程中的程序（如exe）需要调用python程序，如果运行python过程中想要实时调试，可以利用VSCode操作。</p><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol><li>首先确保正在运行的这个程序能让你调试，即如果是交互型的场景（如标准输入输出流），需要让程序进入debug模式；</li><li>Python程序（.py文件）里，在想要debug的代码前加入sleep，确保有足够的时间attach到进程，如：</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">time.sleep(<span class="number">10</span>) <span class="comment">#时间自定义</span></span><br></pre></td></tr></table></figure><ol start="3"><li>VSCode按F5选择【使用ID进行附加】，也就是【Attach using process ID】<br><img src="https://img-blog.csdnimg.cn/5000a4742c4d4f30a40bf25d78621e8c.png#pic_center" alt="使用进程ID进行附加"></li><li>运行主程序，同时开启CMD输入： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist | find &quot;python&quot;</span><br></pre></td></tr></table></figure>复制主程序调用的PID；或者直接去任务管理器查看主程序调用的python.exe的PID，<strong>注意不要和VSCode发起的python.exe混淆！</strong></li></ol><blockquote><p>如果有更好的方法烦请各位读者留言，感激不尽！</p></blockquote><ol start="5"><li>回到VSCode，在上方弹窗【选择要附加到的进程】中输入PID，回车即可。可以提前在代码块中设置断点，这样在attach之后就能进行debug了~</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;某个处于进程中的程序（如exe）需要调用python程序，如果运行python过程中想要实时调试，可以利用VSCode操作。&lt;/p&gt;
-&lt;h2</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://crixusll.github.io/2024/03/30/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E6%B1%82%E9%80%86%E5%85%83%E6%AD%A5%E9%AA%A4%EF%BC%88%E6%89%8B%E5%8A%A8+python%E6%B1%82%E8%A7%A3%EF%BC%89/"/>
-    <id>https://crixusll.github.io/2024/03/30/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E6%B1%82%E9%80%86%E5%85%83%E6%AD%A5%E9%AA%A4%EF%BC%88%E6%89%8B%E5%8A%A8+python%E6%B1%82%E8%A7%A3%EF%BC%89/</id>
-    <published>2024-03-30T12:29:45.080Z</published>
-    <updated>2024-03-30T12:30:00.215Z</updated>
-    
-    <content type="html"><![CDATA[<p>学RSA的时候自己重新理解了一下扩展欧几里得，根据常见求逆元的相关代码，稍微总结了一下步骤，就分享出来叭~</p><h2 id="例子：701-1-mod-1848-x3D"><a href="#例子：701-1-mod-1848-x3D" class="headerlink" title="例子：701^(-1) mod 1848&#x3D;?"></a>例子：701^(-1) mod 1848&#x3D;?</h2><p>换言之，也就是701×?-1848×k&#x3D;1，k是系数，问号?即为701模1848的逆元.</p><h3 id="Step-1-amp-emsp-先用辗转相除法“求”701和1848的最大公因数gcd"><a href="#Step-1-amp-emsp-先用辗转相除法“求”701和1848的最大公因数gcd" class="headerlink" title="Step 1&amp;emsp;先用辗转相除法“求”701和1848的最大公因数gcd"></a>Step 1&amp;emsp;先用辗转相除法“求”701和1848的最大公因数gcd</h3><p>为什么这个求要加双引号呢？因为最大公因数有这样一条性质：</p><blockquote><p>设整数a,b不同时为零，则存在一对整数m,n，使得gcd(a.b) &#x3D; am+bn</p></blockquote><p>因此不用求也知道这两个数的gcd必然为1，否则无法求出逆元，我们要做的只是把求到1的过程列出来，方便后面用扩展欧几里得~<br>过程如图：<br><img src="https://img-blog.csdnimg.cn/20200327160838826.png#pic_center" alt="辗转相除法"></p><h3 id="Step-2-amp-emsp-推出相邻式子关系"><a href="#Step-2-amp-emsp-推出相邻式子关系" class="headerlink" title="Step 2&amp;emsp;推出相邻式子关系"></a>Step 2&amp;emsp;推出相邻式子关系</h3><p>根据</p><blockquote><p>gcd(a,b) &#x3D; gcd(b,a%b)</p></blockquote><p>已知：<br>gcd(a,b)&#x3D;a<font color=red><strong>x</strong></font>+b<font color=blue><strong>y</strong></font><br>a%b&#x3D;a-(a&#x2F;&#x2F;b)*b&amp;emsp;&amp;emsp;&#x2F;&#x2F;指取商的整数部分<br>gcd(b,a%b) &#x3D; bx’+(a-(a&#x2F;&#x2F;b)*b)*y’ &#x3D; a<font color=red><strong>y’</strong></font>+b<font color=blue><strong>(x’– a&#x2F;&#x2F;b*y’)</strong></font><br>推得：<br><strong>x &#x3D; y’<br> y &#x3D; x’ – a&#x2F;&#x2F;b*y’</strong><br>（其中x,y所在式子的下一条是x’,y’）</p><h3 id="Step-3-amp-emsp-扩展欧几里得"><a href="#Step-3-amp-emsp-扩展欧几里得" class="headerlink" title="Step 3&amp;emsp;扩展欧几里得"></a>Step 3&amp;emsp;扩展欧几里得</h3><p>从Step 1中最后得到的1和0我们可以列出a*1+b*0&#x3D;gcd(a,b)&#x3D;1这一式子，再根据Step 2推得的x&#x3D;y’可以一步一步往上代入，以此类推，从而推出每一步的因子x和y，顺序如下（从最底下往上推）：</p><p><img src="https://img-blog.csdnimg.cn/20200327163042654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbGFuZF9MYXU=,size_16,color_FFFFFF,t_70#pic_center" alt="扩展欧几里得"><br>推到刚开始的1848和701后，我们得到y为29，即为所求的逆元.<br><strong>注意：如果得到的y为负数，需要取模才能得到逆元.</strong><br>容易验证：701×29 &#x3D; 1 (mod 1848)</p><p>以下为python代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ext_gcd</span>(<span class="params">a, b</span>): <span class="comment">#扩展欧几里得算法    </span></span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">0</span>:          </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>, <span class="number">0</span>, a     </span><br><span class="line">    <span class="keyword">else</span>:         </span><br><span class="line">        x, y, gcd = ext_gcd(b, a % b) <span class="comment">#递归直至余数等于0(需多递归一层用来判断)        </span></span><br><span class="line">        x, y = y, (x - (a // b) * y) <span class="comment">#辗转相除法反向推导每层a、b的因子使得gcd(a,b)=ax+by成立         </span></span><br><span class="line">        <span class="keyword">return</span> x, y, gcd</span><br></pre></td></tr></table></figure><p>以上述数据为例：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ext_gcd(<span class="number">1848</span>,<span class="number">701</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(-<span class="number">11</span>, <span class="number">29</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure><p>完结撒花~！</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://blog.csdn.net/destiny1507/article/details/81750874">扩展欧几里得算法详解</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;学RSA的时候自己重新理解了一下扩展欧几里得，根据常见求逆元的相关代码，稍微总结了一下步骤，就分享出来叭~&lt;/p&gt;
-&lt;h2 id=&quot;例子：701-1-mod-1848-x3D&quot;&gt;&lt;a href=&quot;#例子：701-1-mod-1848-x3D&quot; class=&quot;headerli</summary>
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>Hello World</title>
@@ -114,6 +72,49 @@
     
     
     <category term="python" scheme="https://crixusll.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VSCode Python程序附加到进程debug</title>
+    <link href="https://crixusll.github.io/2023/03/19/VSCode%20Python%E7%A8%8B%E5%BA%8F%E9%99%84%E5%8A%A0%E5%88%B0%E8%BF%9B%E7%A8%8Bdebug/"/>
+    <id>https://crixusll.github.io/2023/03/19/VSCode%20Python%E7%A8%8B%E5%BA%8F%E9%99%84%E5%8A%A0%E5%88%B0%E8%BF%9B%E7%A8%8Bdebug/</id>
+    <published>2023-03-19T13:36:55.000Z</published>
+    <updated>2024-03-30T12:40:53.465Z</updated>
+    
+    <content type="html"><![CDATA[<p>﻿## 背景</p><p>某个处于进程中的程序（如exe）需要调用python程序，如果运行python过程中想要实时调试，可以利用VSCode操作。</p><h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol><li>首先确保正在运行的这个程序能让你调试，即如果是交互型的场景（如标准输入输出流），需要让程序进入debug模式；</li><li>Python程序（.py文件）里，在想要debug的代码前加入sleep，确保有足够的时间attach到进程，如：</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">time.sleep(<span class="number">10</span>) <span class="comment">#时间自定义</span></span><br></pre></td></tr></table></figure><ol start="3"><li>VSCode按F5选择【使用ID进行附加】，也就是【Attach using process ID】<br><img src="https://img-blog.csdnimg.cn/5000a4742c4d4f30a40bf25d78621e8c.png#pic_center" alt="使用进程ID进行附加"></li><li>运行主程序，同时开启CMD输入： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist | find &quot;python&quot;</span><br></pre></td></tr></table></figure>复制主程序调用的PID；或者直接去任务管理器查看主程序调用的python.exe的PID，<strong>注意不要和VSCode发起的python.exe混淆！</strong></li></ol><blockquote><p>如果有更好的方法烦请各位读者留言，感激不尽！</p></blockquote><ol start="5"><li>回到VSCode，在上方弹窗【选择要附加到的进程】中输入PID，回车即可。可以提前在代码块中设置断点，这样在attach之后就能进行debug了~</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;﻿## 背景&lt;/p&gt;
+&lt;p&gt;某个处于进程中的程序（如exe）需要调用python程序，如果运行python过程中想要实时调试，可以利用VSCode操作。&lt;/p&gt;
+&lt;h2 id=&quot;方法&quot;&gt;&lt;a href=&quot;#方法&quot; class=&quot;headerlink&quot; title=&quot;方法&quot;&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>扩展欧几里得求逆元步骤（手动+python求解）</title>
+    <link href="https://crixusll.github.io/2020/03/27/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E6%B1%82%E9%80%86%E5%85%83%E6%AD%A5%E9%AA%A4%EF%BC%88%E6%89%8B%E5%8A%A8+python%E6%B1%82%E8%A7%A3%EF%BC%89/"/>
+    <id>https://crixusll.github.io/2020/03/27/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E6%B1%82%E9%80%86%E5%85%83%E6%AD%A5%E9%AA%A4%EF%BC%88%E6%89%8B%E5%8A%A8+python%E6%B1%82%E8%A7%A3%EF%BC%89/</id>
+    <published>2020-03-27T08:52:02.000Z</published>
+    <updated>2024-03-30T12:42:10.269Z</updated>
+    
+    <content type="html"><![CDATA[<p>学RSA的时候自己重新理解了一下扩展欧几里得，根据常见求逆元的相关代码，稍微总结了一下步骤，就分享出来叭~</p><h2 id="例子：701-1-mod-1848-x3D"><a href="#例子：701-1-mod-1848-x3D" class="headerlink" title="例子：701^(-1) mod 1848&#x3D;?"></a>例子：701^(-1) mod 1848&#x3D;?</h2><p>换言之，也就是701×?-1848×k&#x3D;1，k是系数，问号?即为701模1848的逆元.</p><h3 id="Step-1-amp-emsp-先用辗转相除法“求”701和1848的最大公因数gcd"><a href="#Step-1-amp-emsp-先用辗转相除法“求”701和1848的最大公因数gcd" class="headerlink" title="Step 1&amp;emsp;先用辗转相除法“求”701和1848的最大公因数gcd"></a>Step 1&amp;emsp;先用辗转相除法“求”701和1848的最大公因数gcd</h3><p>为什么这个求要加双引号呢？因为最大公因数有这样一条性质：</p><blockquote><p>设整数a,b不同时为零，则存在一对整数m,n，使得gcd(a.b) &#x3D; am+bn</p></blockquote><p>因此不用求也知道这两个数的gcd必然为1，否则无法求出逆元，我们要做的只是把求到1的过程列出来，方便后面用扩展欧几里得~<br>过程如图：<br><img src="https://img-blog.csdnimg.cn/20200327160838826.png#pic_center" alt="辗转相除法"></p><h3 id="Step-2-amp-emsp-推出相邻式子关系"><a href="#Step-2-amp-emsp-推出相邻式子关系" class="headerlink" title="Step 2&amp;emsp;推出相邻式子关系"></a>Step 2&amp;emsp;推出相邻式子关系</h3><p>根据</p><blockquote><p>gcd(a,b) &#x3D; gcd(b,a%b)</p></blockquote><p>已知：<br>gcd(a,b)&#x3D;a<font color=red><strong>x</strong></font>+b<font color=blue><strong>y</strong></font><br>a%b&#x3D;a-(a&#x2F;&#x2F;b)*b&amp;emsp;&amp;emsp;&#x2F;&#x2F;指取商的整数部分<br>gcd(b,a%b) &#x3D; bx’+(a-(a&#x2F;&#x2F;b)*b)*y’ &#x3D; a<font color=red><strong>y’</strong></font>+b<font color=blue><strong>(x’– a&#x2F;&#x2F;b*y’)</strong></font><br>推得：<br><strong>x &#x3D; y’<br> y &#x3D; x’ – a&#x2F;&#x2F;b*y’</strong><br>（其中x,y所在式子的下一条是x’,y’）</p><h3 id="Step-3-amp-emsp-扩展欧几里得"><a href="#Step-3-amp-emsp-扩展欧几里得" class="headerlink" title="Step 3&amp;emsp;扩展欧几里得"></a>Step 3&amp;emsp;扩展欧几里得</h3><p>从Step 1中最后得到的1和0我们可以列出a*1+b*0&#x3D;gcd(a,b)&#x3D;1这一式子，再根据Step 2推得的x&#x3D;y’可以一步一步往上代入，以此类推，从而推出每一步的因子x和y，顺序如下（从最底下往上推）：</p><p><img src="https://img-blog.csdnimg.cn/20200327163042654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xlbGFuZF9MYXU=,size_16,color_FFFFFF,t_70#pic_center" alt="扩展欧几里得"><br>推到刚开始的1848和701后，我们得到y为29，即为所求的逆元.<br><strong>注意：如果得到的y为负数，需要取模才能得到逆元.</strong><br>容易验证：701×29 &#x3D; 1 (mod 1848)</p><p>以下为python代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ext_gcd</span>(<span class="params">a, b</span>): <span class="comment">#扩展欧几里得算法    </span></span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">0</span>:          </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>, <span class="number">0</span>, a     </span><br><span class="line">    <span class="keyword">else</span>:         </span><br><span class="line">        x, y, gcd = ext_gcd(b, a % b) <span class="comment">#递归直至余数等于0(需多递归一层用来判断)        </span></span><br><span class="line">        x, y = y, (x - (a // b) * y) <span class="comment">#辗转相除法反向推导每层a、b的因子使得gcd(a,b)=ax+by成立         </span></span><br><span class="line">        <span class="keyword">return</span> x, y, gcd</span><br></pre></td></tr></table></figure><p>以上述数据为例：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ext_gcd(<span class="number">1848</span>,<span class="number">701</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(-<span class="number">11</span>, <span class="number">29</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure><p>完结撒花~！</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://blog.csdn.net/destiny1507/article/details/81750874">扩展欧几里得算法详解</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;学RSA的时候自己重新理解了一下扩展欧几里得，根据常见求逆元的相关代码，稍微总结了一下步骤，就分享出来叭~&lt;/p&gt;
+&lt;h2 id=&quot;例子：701-1-mod-1848-x3D&quot;&gt;&lt;a href=&quot;#例子：701-1-mod-1848-x3D&quot; class=&quot;headerli</summary>
+      
+    
+    
+    
     
   </entry>
   
